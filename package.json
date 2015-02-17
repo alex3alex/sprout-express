@@ -1,0 +1,24 @@
+{
+  "name": "sprout-express",
+  "version": "0.0.1",
+  "description": "a sprout template for an express project",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "~2.2.4",
+    "underscore.string": "~3.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carrot/sprout-express"
+  },
+  "author": "Carrot Creative",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carrot/sprout-express/issues"
+  },
+  "homepage": "https://github.com/carrot/sprout-express"
+}
