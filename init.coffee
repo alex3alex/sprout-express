@@ -3,7 +3,7 @@ path        = require 'path'
 ejs         = require 'ejs'
 classify    = require 'underscore.string/classify'
 underscored = require 'underscore.string/underscored'
-S           = require('underscore.string')
+S           = require 'underscore.string'
 
 exports.before = (sprout, done) ->
   console.log 'generating new express app'
@@ -39,12 +39,8 @@ exports.configure = [
 ]
 
 exports.before_render = (sprout, done) ->
-  user_controllers = sprout.config_values.controllers
-  if user_controllers
-    controllers = sprout.config_values.controllers.split(" ")
-    sprout.config_values.controllers = controllers
-  else
-    sprout.config_values.controllers = ['home']
+  sc = sprout.config_values.controllers
+  sprout.config_values.controllers = if sc then sc.split(' ') else ['home']
   done()
 
 exports.after = (s) ->
