@@ -44,14 +44,13 @@ exports.before_render = (sprout, done) ->
   done()
 
 exports.after = (s) ->
-  # write models
-  if s.config_values.models.length
-    write(s, 'model', model) for model in s.config_values.models.split(' ')
-
-  # write controllers
-  if s.config_values.controllers.length
-    write(s, 'controller', controller) for controller in s.config_values.controllers
-
+  templates = ['model', 'controller']
+  for t in templates
+    configs = s.config_values
+    if t != 'controller' && configs["#{t}s"].length
+      configs.models = configs["#{t}s"].split(' ')
+    tgt = configs["#{t}s"]
+    write(s, t, model) for model in tgt if tgt.length
 
 write = (s, type, name) ->
   tgt = S(name).underscored().value()
