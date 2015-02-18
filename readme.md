@@ -1,6 +1,6 @@
 # sprout-express
 
-a sprout template for a basic express app
+a [sprout](https://github.com/carrot/sprout) template for a basic express app
 
 ### Installation
 
