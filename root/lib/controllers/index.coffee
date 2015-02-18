@@ -1,4 +1,4 @@
-controllers = require('indx')('./controllers')
+controllers = require('indx')(__dirname)
 express     = require 'express'
 
 module.exports = app = express()
