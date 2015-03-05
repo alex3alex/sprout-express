@@ -28,19 +28,19 @@ exports.configure = [
   {
     type: 'input',
     name: 'models',
-    message: 'What are your models? (separate with spaces)'
+    message: 'What are your models? (separate with commas)'
   },
   {
     type: 'input',
     name: 'controllers',
-    message: 'What are your controllers? (separate with spaces)'
+    message: 'What are your controllers? (separate with commas)'
   }
 
 ]
 
 exports.before_render = (sprout, done) ->
   sc = sprout.config_values.controllers
-  sprout.config_values.controllers = if sc then sc.split(' ') else ['home']
+  sprout.config_values.controllers = if sc then sc.split(',') else ['home']
   done()
 
 exports.after = (s) ->
@@ -48,7 +48,7 @@ exports.after = (s) ->
   for t in templates
     configs = s.config_values
     if t != 'controller' && configs["#{t}s"].length
-      configs.models = configs["#{t}s"].split(' ')
+      configs.models = configs["#{t}s"].split(',')
     tgt = configs["#{t}s"]
     write(s, t, model) for model in tgt if tgt.length
 
