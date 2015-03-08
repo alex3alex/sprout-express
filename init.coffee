@@ -5,10 +5,6 @@ classify    = require 'underscore.string/classify'
 underscored = require 'underscore.string/underscored'
 S           = require 'underscore.string'
 
-exports.before = (sprout, done) ->
-  console.log 'generating new express app'
-  done()
-
 exports.configure = [
   {
     type: 'input',
