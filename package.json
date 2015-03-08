@@ -7,9 +7,16 @@
     "ejs": "~2.2.4",
     "underscore.string": "~3.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "sprout": "*",
+    "mocha": "*",
+    "coffee-script": "~1.9.1",
+    "rimraf": "~2.3.1",
+    "chai": "~2.1.1",
+    "chai-as-promised": "4.3.x"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
