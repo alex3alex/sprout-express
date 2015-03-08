@@ -39,7 +39,7 @@ exports.before_render = (sprout, done) ->
   sprout.config_values.controllers = if sc then sc.split(',') else ['home']
   done()
 
-exports.after = (s) ->
+exports.after = (s, done) ->
   templates = ['model', 'controller']
   for t in templates
     configs = s.config_values
@@ -47,6 +47,9 @@ exports.after = (s) ->
       configs.models = configs["#{t}s"].split(',')
     tgt = configs["#{t}s"]
     write(s, t, model) for model in tgt if tgt.length
+
+  fs.unlink path.join(s.target, 'lib', 'models', '.gitkeep'), -> done()
+
 
 write = (s, type, name) ->
   tgt = S(name).underscored().value()
