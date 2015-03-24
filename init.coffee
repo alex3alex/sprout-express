@@ -36,8 +36,8 @@ exports.configure = [
 ]
 
 exports.beforeRender = (utils, config) ->
-  config.controllers = if config.controllers then config.controllers.split(' ') else ['home'];
-  config.models = if config.models then config.models.split(' ') else []
+  config.controllers = if config.controllers then config.controllers.split(/\,[\s+]?/) else ['home'];
+  config.models = if config.models then config.models.split(/\,[\s+]?/) else []
 
 exports.after = (utils, config) ->
   output_template_for_type('controller', config.controllers, utils, config)
