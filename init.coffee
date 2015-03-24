@@ -1,13 +1,10 @@
-fs          = require 'fs'
 path        = require 'path'
-ejs         = require 'ejs'
-classify    = require 'underscore.string/classify'
-underscored = require 'underscore.string/underscored'
+_           = require 'lodash'
 S           = require 'underscore.string'
+Promise     = require 'bluebird'
 
-exports.before = (sprout, done) ->
+exports.before = (config, utils) ->
   console.log 'generating new express app'
-  done()
 
 exports.configure = [
   {
@@ -38,23 +35,18 @@ exports.configure = [
 
 ]
 
-exports.before_render = (sprout, done) ->
-  sc = sprout.config_values.controllers
-  sprout.config_values.controllers = if sc then sc.split(' ') else ['home']
-  done()
+exports.beforeRender = (utils, config) ->
+  config.controllers = if config.controllers then config.controllers.split(' ') else ['home'];
+  config.models = if config.models then config.models.split(' ') else []
 
-exports.after = (s) ->
-  templates = ['model', 'controller']
-  for t in templates
-    configs = s.config_values
-    if t != 'controller' && configs["#{t}s"].length
-      configs.models = configs["#{t}s"].split(' ')
-    tgt = configs["#{t}s"]
-    write(s, t, model) for model in tgt if tgt.length
+exports.after = (utils, config) ->
+  output_template_for_type('controller', config.controllers, utils, config)
+    .then -> output_template_for_type('model', config.models, utils, config)
 
-write = (s, type, name) ->
-  tgt = S(name).underscored().value()
-  tpl = fs.readFileSync(path.join(__dirname, "templates/#{type}.coffee"), 'utf8')
-  output_path = path.join(s.target, "lib/#{type}s/#{tgt}.coffee")
-  text = ejs.render(tpl, {name: name, S: S })
-  fs.writeFileSync(output_path, text)
+output_template_for_type = (type, names, utils, config) ->
+  Promise.map names, (name) ->
+    underscored_name = S(name).underscored().value()
+    tgt_path = path.join('lib', "#{type}s", "#{underscored_name}.coffee")
+    tpl_path = path.join('templates', "#{type}.coffee")
+    utils.read(tpl_path).then (output) ->
+      utils.write(tgt_path, output, _.extend(config, {name: name}))
