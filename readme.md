@@ -1,6 +1,6 @@
 # sprout-express
 
-a [sprout](https://github.com/carrot/sprout) template for a basic express app
+a [sprout](https://github.com/carrot/sprout) (>= 0.2.0) template for a basic express app
 
 ### Installation
 
@@ -13,5 +13,16 @@ a [sprout](https://github.com/carrot/sprout) template for a basic express app
 - **name** (name of template)
 - **github_username** (name of github user)
 - **description** (a short description of the template)
-- **models** (names of models, separated by spaces)
-- **controllers** (names of controllers, separated by spaces)
+
+### Generators
+
+To create a `.coffee` for routes:
+
+```sh
+$ cd myexpressapp
+$ sprout run express routes routesname
+```
+
+### License & Contributing
+
+- Details on the license [can be found here](license.md)
