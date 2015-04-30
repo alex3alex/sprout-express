@@ -5,7 +5,9 @@
   "main": "index.js",
   "dependencies": {
     "ejs": "~2.2.4",
-    "underscore.string": "~3.0.3"
+    "bluebird": "^2.9.14",
+    "lodash": "^3.5.0",
+    "underscore.string": "^3.0.3"
   },
   "devDependencies": {},
   "scripts": {
