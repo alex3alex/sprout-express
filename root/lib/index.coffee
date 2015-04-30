@@ -1,15 +1,9 @@
-controllers = require './controllers'
-config      = require './config'
-express     = require 'express'
-body_parser = require 'body-parser'
-morgan      = require 'morgan'
+express = require 'express'
 
-module.exports = app = express()
+app = express()
 
-app.set 'config', config
+require('./app')(app)
+require('./routes')(app)
 
-app.use morgan('dev')
-app.use body_parser.urlencoded(extended: true)
-app.use body_parser.json()
-
-app.use controllers
+module.exports = (port, callback) ->
+  app.listen port, -> callback(port)
