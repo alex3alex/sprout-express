@@ -14,5 +14,4 @@ exports.configure = [
     name: 'description',
     message: 'Describe your project'
   }
-
 ]
